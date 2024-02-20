@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
-    namespace = "br.edu.ifsp.scl.sdm.dummyproducts"
+    namespace = "br.edu.ifsp.scl.sdm.photos"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "br.edu.ifsp.scl.sdm.dummyproducts"
+        applicationId = "br.edu.ifsp.scl.sdm.photos"
         minSdk = 26
         targetSdk = 34
         versionCode = 1

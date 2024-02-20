@@ -1,4 +1,4 @@
-package br.edu.ifsp.scl.sdm.dummyproducts
+package br.edu.ifsp.scl.sdm.photos
 
 import org.junit.Test
 

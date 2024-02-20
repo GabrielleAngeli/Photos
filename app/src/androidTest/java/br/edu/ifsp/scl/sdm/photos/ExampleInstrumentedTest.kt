@@ -1,4 +1,4 @@
-package br.edu.ifsp.scl.sdm.dummyproducts
+package br.edu.ifsp.scl.sdm.photos
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4

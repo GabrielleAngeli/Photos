@@ -1,4 +1,4 @@
-package br.edu.ifsp.scl.sdm.dummyproducts.adapter
+package br.edu.ifsp.scl.sdm.photos.adapter
 
 import android.content.Context
 import android.graphics.Bitmap
@@ -6,7 +6,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
-import br.edu.ifsp.scl.sdm.dummyproducts.databinding.TileProductImageBinding
+import br.edu.ifsp.scl.sdm.photos.databinding.TileProductImageBinding
 
 class ProductImageAdapter(val activityContext: Context, val productImageList: MutableList<Bitmap>):
 RecyclerView.Adapter<ProductImageAdapter.ProductImageViewHolder>(){

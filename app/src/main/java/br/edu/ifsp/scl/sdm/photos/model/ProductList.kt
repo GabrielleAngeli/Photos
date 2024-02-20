@@ -1,4 +1,4 @@
-package br.edu.ifsp.scl.sdm.dummyproducts.model
+package br.edu.ifsp.scl.sdm.photos.model
 
 data class ProductList(
     val limit: Int,

@@ -1,7 +1,6 @@
-package br.edu.ifsp.scl.sdm.dummyproducts.ui
+package br.edu.ifsp.scl.sdm.photos.ui
 
 import android.graphics.Bitmap
-import android.graphics.BitmapFactory
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -9,24 +8,13 @@ import android.widget.AdapterView
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
-import br.edu.ifsp.scl.sdm.dummyproducts.R
-import br.edu.ifsp.scl.sdm.dummyproducts.adapter.ProductAdapter
-import br.edu.ifsp.scl.sdm.dummyproducts.adapter.ProductImageAdapter
-import br.edu.ifsp.scl.sdm.dummyproducts.databinding.ActivityMainBinding
-import br.edu.ifsp.scl.sdm.dummyproducts.model.DummyJSONAPI
-import br.edu.ifsp.scl.sdm.dummyproducts.model.Product
-import br.edu.ifsp.scl.sdm.dummyproducts.model.ProductList
-import com.android.volley.Request
+import br.edu.ifsp.scl.sdm.photos.R
+import br.edu.ifsp.scl.sdm.photos.adapter.ProductAdapter
+import br.edu.ifsp.scl.sdm.photos.adapter.ProductImageAdapter
+import br.edu.ifsp.scl.sdm.photos.databinding.ActivityMainBinding
+import br.edu.ifsp.scl.sdm.photos.model.DummyJSONAPI
+import br.edu.ifsp.scl.sdm.photos.model.Product
 import com.android.volley.toolbox.ImageRequest
-import com.android.volley.toolbox.StringRequest
-import com.google.gson.Gson
-import com.google.gson.JsonSyntaxException
-import java.io.BufferedInputStream
-import java.io.IOException
-import java.io.InputStreamReader
-import java.net.HttpURLConnection
-import java.net.HttpURLConnection.HTTP_OK
-import java.net.URL
 
 class MainActivity : AppCompatActivity() {
     private val amb: ActivityMainBinding by lazy {
