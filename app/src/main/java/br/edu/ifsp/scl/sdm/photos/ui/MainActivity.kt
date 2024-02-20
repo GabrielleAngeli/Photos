@@ -13,7 +13,6 @@ import br.edu.ifsp.scl.sdm.photos.adapter.ProductImageAdapter
 import br.edu.ifsp.scl.sdm.photos.databinding.ActivityMainBinding
 import br.edu.ifsp.scl.sdm.photos.model.DummyJSONAPI
 import br.edu.ifsp.scl.sdm.photos.model.PhotoItem
-import br.edu.ifsp.scl.sdm.photos.model.Product
 import com.android.volley.toolbox.ImageRequest
 
 class MainActivity : AppCompatActivity() {
@@ -46,7 +45,8 @@ class MainActivity : AppCompatActivity() {
                     val size = productImageList.size
                     productImageList.clear()
                     productImageAdapter.notifyItemRangeRemoved(0, size)
-                   // retrieveProductImages(photoList[position])
+                    retrievePhotosImages(photoList[position].url, amb.imagePhoto)
+                    retrievePhotosImages(photoList[position].thumbnailUrl, amb.imageThumbnail)
                 }
 
                 override fun onNothingSelected(p0: AdapterView<*>?) {
@@ -54,11 +54,6 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
-
-//        amb.productImagesRv.apply {
-//            layoutManager = LinearLayoutManager(this@MainActivity)
-//            adapter = productImageAdapter
-//        }
 
         retrievePhotos()
     }
@@ -75,18 +70,15 @@ class MainActivity : AppCompatActivity() {
         DummyJSONAPI.getInstance(this).addToRequestQueue(it)
     }
 
-    private fun retrieveProductImages(product: Product) =
-        product.images.forEach{ imageUrl ->
+    private fun retrievePhotosImages(imageUrl: String, view: ImageView) =
             ImageRequest(imageUrl,
                 { response ->
-                    productImageList.add(response)
-                    productImageAdapter.notifyItemInserted(productImageList.lastIndex)
+                    view.setImageBitmap(response)
 
                 }, 0, 0,ImageView.ScaleType.CENTER, Bitmap.Config.ARGB_8888, {
                     Toast.makeText(this, "Request Problem!", Toast.LENGTH_SHORT).show()
                 }).also {
                     DummyJSONAPI.getInstance(this).addToRequestQueue(it)
             }
-        }
 
 }
