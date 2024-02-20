@@ -43,9 +43,6 @@ class MainActivity : AppCompatActivity() {
         ProductImageAdapter(this, productImageList)
     }
 
-    companion object {
-        const val PRODUCTS_ENDPOINT = "https://dummyjson.com/products/"
-    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(amb.root)
@@ -78,17 +75,17 @@ class MainActivity : AppCompatActivity() {
         retrieveProducts()
     }
 
-    private fun retrieveProducts() = StringRequest(Request.Method.GET, PRODUCTS_ENDPOINT,
-            { response ->
-                Gson().fromJson(response, ProductList::class.java).products.also {
-                    productAdapter.addAll(it)
-                }
-            }, {
-                Toast.makeText(this, "Request Problem!", Toast.LENGTH_SHORT).show()
+    private fun retrieveProducts() = DummyJSONAPI.ProductListRequest(
+        {productList ->
+            productList.products.also {
+                productAdapter.addAll(it)
             }
-        ).also {
-            DummyJSONAPI.getInstance(this).addToRequestQueue(it)
-        }
+        },
+        {
+            Toast.makeText(this, "Request Problem!", Toast.LENGTH_SHORT).show()
+        }).also {
+        DummyJSONAPI.getInstance(this).addToRequestQueue(it)
+    }
 
     private fun retrieveProductImages(product: Product) =
         product.images.forEach{ imageUrl ->
