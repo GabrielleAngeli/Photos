@@ -14,7 +14,7 @@ import java.net.HttpURLConnection.HTTP_OK
 
 class DummyJSONAPI(context: Context) {
     companion object {
-        const val PRODUCTS_ENDPOINT = "https://dummyjson.com/products/"
+        const val PHOTOS_ENDPOINT = "https://jsonplaceholder.typicode.com/photos"
 
         @Volatile
         private var INSTANCE: DummyJSONAPI? = null
@@ -34,15 +34,15 @@ class DummyJSONAPI(context: Context) {
         requestQueue.add((request))
     }
 
-    class ProductListRequest(
-        private val responseListener: Response.Listener<ProductList>,
+    class PhotoListRequest(
+        private val responseListener: Response.Listener<PhotoList>,
         errorListener: Response.ErrorListener
-    ): Request<ProductList>(Method.GET, PRODUCTS_ENDPOINT, errorListener) {
-        override fun parseNetworkResponse(response: NetworkResponse?): Response<ProductList> =
+    ): Request<PhotoList>(Method.GET, PHOTOS_ENDPOINT, errorListener) {
+        override fun parseNetworkResponse(response: NetworkResponse?): Response<PhotoList> =
            if(response?.statusCode == HTTP_OK || response?.statusCode == HTTP_NOT_MODIFIED){
                String(response.data).run {
                    Response.success(
-                       Gson().fromJson(this, ProductList::class.java),
+                       Gson().fromJson(this, PhotoList::class.java),
                        HttpHeaderParser.parseCacheHeaders(response)
                    )
                }
@@ -51,7 +51,7 @@ class DummyJSONAPI(context: Context) {
            }
 
 
-        override fun deliverResponse(response: ProductList?) {
+        override fun deliverResponse(response: PhotoList?) {
             responseListener.onResponse(response)
         }
 

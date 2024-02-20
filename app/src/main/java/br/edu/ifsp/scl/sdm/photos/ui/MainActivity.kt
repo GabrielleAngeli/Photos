@@ -7,12 +7,12 @@ import android.view.View
 import android.widget.AdapterView
 import android.widget.ImageView
 import android.widget.Toast
-import androidx.recyclerview.widget.LinearLayoutManager
 import br.edu.ifsp.scl.sdm.photos.R
-import br.edu.ifsp.scl.sdm.photos.adapter.ProductAdapter
+import br.edu.ifsp.scl.sdm.photos.adapter.PhotoAdapter
 import br.edu.ifsp.scl.sdm.photos.adapter.ProductImageAdapter
 import br.edu.ifsp.scl.sdm.photos.databinding.ActivityMainBinding
 import br.edu.ifsp.scl.sdm.photos.model.DummyJSONAPI
+import br.edu.ifsp.scl.sdm.photos.model.PhotoItem
 import br.edu.ifsp.scl.sdm.photos.model.Product
 import com.android.volley.toolbox.ImageRequest
 
@@ -21,9 +21,9 @@ class MainActivity : AppCompatActivity() {
         ActivityMainBinding.inflate(layoutInflater)
     }
 
-    private val productList: MutableList<Product> = mutableListOf()
-    private val productAdapter: ProductAdapter by lazy {
-        ProductAdapter(this, productList)
+    private val photoList: MutableList<PhotoItem> = mutableListOf()
+    private val photoAdapter: PhotoAdapter by lazy {
+        PhotoAdapter(this, photoList)
     }
 
     private val productImageList: MutableList<Bitmap> = mutableListOf()
@@ -39,14 +39,14 @@ class MainActivity : AppCompatActivity() {
             title = getString(R.string.app_name)
         })
 
-        amb.productsSp.apply {
-            adapter = productAdapter
+        amb.photosSp.apply {
+            adapter = photoAdapter
             onItemSelectedListener =  object : AdapterView.OnItemSelectedListener{
                 override fun onItemSelected(p0: AdapterView<*>?, p1: View?, position: Int, p3: Long) {
                     val size = productImageList.size
                     productImageList.clear()
                     productImageAdapter.notifyItemRangeRemoved(0, size)
-                    retrieveProductImages(productList[position])
+                   // retrieveProductImages(photoList[position])
                 }
 
                 override fun onNothingSelected(p0: AdapterView<*>?) {
@@ -55,18 +55,18 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        amb.productImagesRv.apply {
-            layoutManager = LinearLayoutManager(this@MainActivity)
-            adapter = productImageAdapter
-        }
+//        amb.productImagesRv.apply {
+//            layoutManager = LinearLayoutManager(this@MainActivity)
+//            adapter = productImageAdapter
+//        }
 
-        retrieveProducts()
+        retrievePhotos()
     }
 
-    private fun retrieveProducts() = DummyJSONAPI.ProductListRequest(
-        {productList ->
-            productList.products.also {
-                productAdapter.addAll(it)
+    private fun retrievePhotos() = DummyJSONAPI.PhotoListRequest(
+        { photoList ->
+            photoList.also {
+                photoAdapter.addAll(it)
             }
         },
         {
